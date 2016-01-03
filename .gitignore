@@ -1,0 +1,25 @@
+# Gem files
+/*.gem
+
+# database connection file
+/database.yml
+
+# backup files
+*~
+
+# swap files
+*.swp
+*.kate-swp
+
+# file manager files
+*.directory
+
+# coverage
+/coverage
+
+# documentation
+/doc
+/.yardoc
+
+# Example server roots
+/examples/*test_root
