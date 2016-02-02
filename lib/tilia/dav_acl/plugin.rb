@@ -761,7 +761,7 @@ module Tilia
         if node.is_a?(IAcl)
           prop_find.handle(
             '{DAV:}owner',
-            -> { Dav::Xml::Property::Href.new(node.owner + '/') }
+            -> { Dav::Xml::Property::Href.new("#{node.owner}/") }
           )
         end
       end
