@@ -67,7 +67,7 @@ module Tilia
             request = Http::Sapi.create_from_server_array(
               'REQUEST_METHOD'  => 'GET',
               'PHP_AUTH_DIGEST' => header,
-              'REQUEST_PATH'    => '/'
+              'PATH_INFO'       => '/'
             )
 
             response = Http::Response.new

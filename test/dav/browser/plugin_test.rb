@@ -100,7 +100,7 @@ module Tilia
 
         def test_post_mk_col
           server_vars = {
-            'REQUEST_PATH'   => '/',
+            'PATH_INFO'      => '/',
             'REQUEST_METHOD' => 'POST',
             'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
           }

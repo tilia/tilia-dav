@@ -7,7 +7,7 @@ module Tilia
         class SupportedReportSetTest < AbstractServer
           def send_propfind(body)
             server_vars = {
-              'REQUEST_PATH'        => '/',
+              'PATH_INFO'           => '/',
               'REQUEST_METHOD'      => 'PROPFIND',
               'HTTP_DEPTH'          => '0'
             }

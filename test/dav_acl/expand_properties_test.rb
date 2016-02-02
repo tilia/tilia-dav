@@ -54,7 +54,7 @@ XML
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '0',
-          'REQUEST_PATH'   => '/node1'
+          'PATH_INFO'      => '/node1'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -105,7 +105,7 @@ XML
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '0',
-          'REQUEST_PATH'   => '/node1'
+          'PATH_INFO'      => '/node1'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -159,7 +159,7 @@ XML
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '0',
-          'REQUEST_PATH'   => '/node2'
+          'PATH_INFO'      => '/node2'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -215,7 +215,7 @@ XML
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '0',
-          'REQUEST_PATH'   => '/node2'
+          'PATH_INFO'      => '/node2'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)

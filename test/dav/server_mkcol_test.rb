@@ -5,7 +5,7 @@ module Tilia
     class ServerMKCOLTest < AbstractServer
       def test_mkcol
         server_vars = {
-          'REQUEST_PATH'   => '/testcol',
+          'PATH_INFO'      => '/testcol',
           'REQUEST_METHOD' => 'MKCOL'
         }
 
@@ -29,7 +29,7 @@ module Tilia
 
       def test_mkcol_unknown_body
         server_vars = {
-          'REQUEST_PATH'   => '/testcol',
+          'PATH_INFO'      => '/testcol',
           'REQUEST_METHOD' => 'MKCOL'
         }
 
@@ -51,7 +51,7 @@ module Tilia
 
       def test_mkcol_broken_xml
         server_vars = {
-          'REQUEST_PATH'   => '/testcol',
+          'PATH_INFO'      => '/testcol',
           'REQUEST_METHOD' => 'MKCOL',
           'HTTP_CONTENT_TYPE' => 'application/xml'
         }
@@ -74,7 +74,7 @@ module Tilia
 
       def test_mkcol_unknown_xml
         server_vars = {
-          'REQUEST_PATH'   => '/testcol',
+          'PATH_INFO'      => '/testcol',
           'REQUEST_METHOD' => 'MKCOL',
           'HTTP_CONTENT_TYPE' => 'application/xml'
         }
@@ -97,7 +97,7 @@ module Tilia
 
       def test_mkcol_no_resource_type
         server_vars = {
-          'REQUEST_PATH'   => '/testcol',
+          'PATH_INFO'      => '/testcol',
           'REQUEST_METHOD' => 'MKCOL',
           'HTTP_CONTENT_TYPE' => 'application/xml'
         }
@@ -130,7 +130,7 @@ XML
 
       def test_mkcol_incorrect_resource_type
         server_vars = {
-          'REQUEST_PATH'   => '/testcol',
+          'PATH_INFO'      => '/testcol',
           'REQUEST_METHOD' => 'MKCOL',
           'HTTP_CONTENT_TYPE' => 'application/xml'
         }
@@ -163,7 +163,7 @@ XML
 
       def test_mkcol_success
         server_vars = {
-          'REQUEST_PATH'   => '/testcol',
+          'PATH_INFO'      => '/testcol',
           'REQUEST_METHOD' => 'MKCOL',
           'HTTP_CONTENT_TYPE' => 'application/xml'
         }
@@ -196,7 +196,7 @@ XML
 
       def test_mkcol_white_space_resource_type
         server_vars = {
-          'REQUEST_PATH'   => '/testcol',
+          'PATH_INFO'      => '/testcol',
           'REQUEST_METHOD' => 'MKCOL',
           'HTTP_CONTENT_TYPE' => 'application/xml'
         }
@@ -231,7 +231,7 @@ XML
 
       def test_mkcol_no_parent
         server_vars = {
-          'REQUEST_PATH'   => '/testnoparent/409me',
+          'PATH_INFO'      => '/testnoparent/409me',
           'REQUEST_METHOD' => 'MKCOL'
         }
 
@@ -254,7 +254,7 @@ XML
 
       def test_mkcol_parent_is_no_collection
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt/409me',
+          'PATH_INFO'      => '/test.txt/409me',
           'REQUEST_METHOD' => 'MKCOL'
         }
 
@@ -277,7 +277,7 @@ XML
 
       def test_mkcol_already_exists
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'MKCOL'
         }
 
@@ -301,7 +301,7 @@ XML
 
       def test_mkcol_and_props
         server_vars = {
-          'REQUEST_PATH'   => '/testcol',
+          'PATH_INFO'      => '/testcol',
           'REQUEST_METHOD' => 'MKCOL',
           'HTTP_CONTENT_TYPE' => 'application/xml'
         }

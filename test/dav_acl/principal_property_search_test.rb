@@ -41,7 +41,7 @@ BODY
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '1',
-          'REQUEST_PATH'   => '/principals'
+          'PATH_INFO'      => '/principals'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -80,7 +80,7 @@ BODY
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '0',
-          'REQUEST_PATH'   => '/principals'
+          'PATH_INFO'      => '/principals'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -121,7 +121,7 @@ BODY
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '0',
-          'REQUEST_PATH'   => '/'
+          'PATH_INFO'      => '/'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -186,7 +186,7 @@ BODY
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '0',
-          'REQUEST_PATH'   => '/'
+          'PATH_INFO'      => '/'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -251,7 +251,7 @@ BODY
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '0',
-          'REQUEST_PATH'   => '/'
+          'PATH_INFO'      => '/'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -309,7 +309,7 @@ BODY
         server_vars = {
           'REQUEST_METHOD' => 'REPORT',
           'HTTP_DEPTH'     => '0',
-          'REQUEST_PATH'   => '/'
+          'PATH_INFO'      => '/'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)

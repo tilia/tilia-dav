@@ -67,7 +67,7 @@ ics
         @server = Dav::ServerMock.new([calendar])
 
         request = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/calendar'
+          'PATH_INFO'    => '/calendar'
         )
         @server.http_request = request
         @server.http_response = Http::ResponseMock.new
@@ -110,7 +110,7 @@ XML
 
       def test_free_busy_report_wrong_node
         request = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/'
+          'PATH_INFO'    => '/'
         )
         @server.http_request = request
 
@@ -134,7 +134,7 @@ XML
         @server.add_plugin(@plugin)
 
         request = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/'
+          'PATH_INFO'    => '/'
         )
         @server.http_request = request
 

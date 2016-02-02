@@ -25,7 +25,7 @@ module Tilia
           @node.put('aaaaaaaa')
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'PATCH',
-            'REQUEST_PATH'   => '/partial'
+            'PATH_INFO'      => '/partial'
           )
           response = request(request)
 

@@ -11,7 +11,7 @@ module Tilia
 
         def test_pass_through
           server_vars = {
-            'REQUEST_PATH'   => '/',
+            'PATH_INFO'      => '/',
             'REQUEST_METHOD' => 'GET'
           }
 
@@ -24,7 +24,7 @@ module Tilia
 
         def test_mount_response
           server_vars = {
-            'REQUEST_PATH'   => '/',
+            'PATH_INFO'      => '/',
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING'   => 'mount',
             'HTTP_HOST'      => 'example.org'

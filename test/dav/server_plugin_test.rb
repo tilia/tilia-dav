@@ -29,7 +29,7 @@ module Tilia
 
       def test_options
         server_vars = {
-          'REQUEST_PATH'   => '/',
+          'PATH_INFO'      => '/',
           'REQUEST_METHOD' => 'OPTIONS'
         }
 

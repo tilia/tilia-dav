@@ -39,7 +39,7 @@ VCF
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD'    => 'REPORT',
           'HTTP_CONTENT_TYPE' => 'application/xml',
-          'REQUEST_PATH'      => '/calendars/user1/calendar1',
+          'PATH_INFO'         => '/calendars/user1/calendar1',
           'HTTP_DEPTH'        => '1'
         )
 

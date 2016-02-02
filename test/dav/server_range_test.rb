@@ -9,7 +9,7 @@ module Tilia
 
       def test_range
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'GET',
           'HTTP_RANGE'     => 'bytes=2-5'
         }
@@ -40,7 +40,7 @@ module Tilia
 
       def test_start_range
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'GET',
           'HTTP_RANGE'     => 'bytes=2-'
         }
@@ -71,7 +71,7 @@ module Tilia
 
       def test_end_range
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'GET',
           'HTTP_RANGE'     => 'bytes=-8'
         }
@@ -102,7 +102,7 @@ module Tilia
 
       def test_too_high_range
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'GET',
           'HTTP_RANGE'     => 'bytes=100-200'
         }
@@ -116,7 +116,7 @@ module Tilia
 
       def test_crazy_range
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'GET',
           'HTTP_RANGE'     => 'bytes=8-4'
         }
@@ -132,7 +132,7 @@ module Tilia
         node = @server.tree.node_for_path('test.txt')
 
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'GET',
           'HTTP_RANGE'     => 'bytes=2-5',
           'HTTP_IF_RANGE'  => node.etag
@@ -166,7 +166,7 @@ module Tilia
         node = @server.tree.node_for_path('test.txt')
 
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'GET',
           'HTTP_RANGE'     => 'bytes=2-5',
           'HTTP_IF_RANGE'  => node.etag + 'blabla'
@@ -197,7 +197,7 @@ module Tilia
 
       def test_if_range_modification_date
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'GET',
           'HTTP_RANGE'     => 'bytes=2-5',
           'HTTP_IF_RANGE'  => 'tomorrow'
@@ -229,7 +229,7 @@ module Tilia
 
       def test_if_range_modification_date_modified
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'GET',
           'HTTP_RANGE'     => 'bytes=2-5',
           'HTTP_IF_RANGE'  => '-2 years'

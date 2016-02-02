@@ -341,7 +341,7 @@ XML
 
         def test_lock_retain_owner
           request = Http::Sapi.create_from_server_array(
-            'REQUEST_PATH'   => '/test.txt',
+            'PATH_INFO'      => '/test.txt',
             'REQUEST_METHOD' => 'LOCK'
           )
           @server.http_request = request
@@ -365,7 +365,7 @@ XML
 
         def test_lock_put_bad_token
           server_vars = {
-            'REQUEST_PATH'   => '/test.txt',
+            'PATH_INFO'      => '/test.txt',
             'REQUEST_METHOD' => 'LOCK'
           }
 
@@ -390,7 +390,7 @@ XML
           assert_equal(200, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/test.txt',
+            'PATH_INFO'      => '/test.txt',
             'REQUEST_METHOD' => 'PUT',
             'HTTP_IF' => '(<opaquelocktoken:token1>)'
           }
@@ -409,7 +409,7 @@ XML
 
         def test_lock_delete_parent
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'LOCK'
           }
 
@@ -434,7 +434,7 @@ XML
           assert_equal(200, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/dir',
+            'PATH_INFO'      => '/dir',
             'REQUEST_METHOD' => 'DELETE'
           }
 
@@ -448,7 +448,7 @@ XML
 
         def test_lock_delete_succeed
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'LOCK'
           }
 
@@ -473,7 +473,7 @@ XML
           assert_equal(200, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'DELETE',
             'HTTP_IF' => "(#{@response.header('Lock-Token')})"
           }
@@ -488,7 +488,7 @@ XML
 
         def test_lock_copy_lock_source
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'LOCK'
           }
 
@@ -513,7 +513,7 @@ XML
           assert_equal(200, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'COPY',
             'HTTP_DESTINATION' => '/dir/child2.txt'
           }
@@ -528,7 +528,7 @@ XML
 
         def test_lock_copy_lock_destination
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child2.txt',
+            'PATH_INFO'      => '/dir/child2.txt',
             'REQUEST_METHOD' => 'LOCK'
           }
 
@@ -553,7 +553,7 @@ XML
           assert_equal(201, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'COPY',
             'HTTP_DESTINATION' => '/dir/child2.txt'
           }
@@ -568,7 +568,7 @@ XML
 
         def test_lock_move_lock_source_locked
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'LOCK'
           }
 
@@ -593,7 +593,7 @@ XML
           assert_equal(200, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'MOVE',
             'HTTP_DESTINATION' => '/dir/child2.txt'
           }
@@ -608,7 +608,7 @@ XML
 
         def test_lock_move_lock_source_succeed
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'LOCK'
           }
 
@@ -633,7 +633,7 @@ XML
           assert_equal(200, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'MOVE',
             'HTTP_DESTINATION' => '/dir/child2.txt',
             'HTTP_IF' => "(#{@response.header('Lock-Token')})"
@@ -648,7 +648,7 @@ XML
 
         def test_lock_move_lock_destination
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child2.txt',
+            'PATH_INFO'      => '/dir/child2.txt',
             'REQUEST_METHOD' => 'LOCK'
           }
 
@@ -673,7 +673,7 @@ XML
           assert_equal(201, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'MOVE',
             'HTTP_DESTINATION' => '/dir/child2.txt'
           }
@@ -688,7 +688,7 @@ XML
 
         def test_lock_move_lock_parent
           server_vars = {
-            'REQUEST_PATH'   => '/dir',
+            'PATH_INFO'      => '/dir',
             'REQUEST_METHOD' => 'LOCK',
             'HTTP_DEPTH' => 'infinite'
           }
@@ -714,7 +714,7 @@ XML
           assert_equal(200, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/dir/child.txt',
+            'PATH_INFO'      => '/dir/child.txt',
             'REQUEST_METHOD' => 'MOVE',
             'HTTP_DESTINATION' => '/dir/child2.txt',
             'HTTP_IF' => "</dir> (#{@response.header('Lock-Token')})"
@@ -730,7 +730,7 @@ XML
 
         def test_lock_put_good_token
           server_vars = {
-            'REQUEST_PATH'   => '/test.txt',
+            'PATH_INFO'      => '/test.txt',
             'REQUEST_METHOD' => 'LOCK'
           }
 
@@ -755,7 +755,7 @@ XML
           assert_equal(200, @response.status)
 
           server_vars = {
-            'REQUEST_PATH'   => '/test.txt',
+            'PATH_INFO'      => '/test.txt',
             'REQUEST_METHOD' => 'PUT',
             'HTTP_IF' => "(#{@response.header('Lock-Token')})"
           }
@@ -809,7 +809,7 @@ XML
 
         def test_put_with_incorrect_etag
           server_vars = {
-            'REQUEST_PATH'   => '/test.txt',
+            'PATH_INFO'      => '/test.txt',
             'REQUEST_METHOD' => 'PUT',
             'HTTP_IF' => '(["etag1"])'
           }
@@ -830,7 +830,7 @@ XML
           stat = ::File.stat(filename)
           etag = Digest::SHA1.hexdigest(stat.ino.to_s + stat.size.to_s + stat.mtime.to_s)
           server_vars = {
-            'REQUEST_PATH'   => '/test.txt',
+            'PATH_INFO'      => '/test.txt',
             'REQUEST_METHOD' => 'PUT',
             'HTTP_IF' => "([\"#{etag}\"])"
           }
@@ -844,7 +844,7 @@ XML
 
         def test_delete_with_etag_on_collection
           server_vars = {
-            'REQUEST_PATH'   => '/dir',
+            'PATH_INFO'      => '/dir',
             'REQUEST_METHOD' => 'DELETE',
             'HTTP_IF' => '(["etag1"])'
           }

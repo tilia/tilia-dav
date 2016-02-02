@@ -151,7 +151,7 @@ module Tilia
         server = ServerMock.new(root)
         http_request = Http::Sapi.create_from_server_array(
           'HTTP_IF_MODIFIED_SINCE' => 'Sun, 06 Nov 1994 08:49:37 GMT',
-          'REQUEST_PATH'  => '/foo'
+          'PATH_INFO'     => '/foo'
         )
         server.http_response = Http::ResponseMock.new
         refute(server.check_preconditions(http_request, server.http_response))
@@ -168,7 +168,7 @@ module Tilia
         server = ServerMock.new(root)
         http_request = Http::Sapi.create_from_server_array(
           'HTTP_IF_MODIFIED_SINCE' => 'Tue, 06 Nov 1984 08:49:37 GMT',
-          'REQUEST_PATH'  => '/foo'
+          'PATH_INFO'     => '/foo'
         )
 
         http_response = Http::ResponseMock.new
@@ -180,7 +180,7 @@ module Tilia
         server = ServerMock.new(root)
         http_request = Http::Sapi.create_from_server_array(
           'HTTP_IF_MODIFIED_SINCE' => 'Your mother',
-          'REQUEST_PATH'  => '/foo'
+          'PATH_INFO'     => '/foo'
         )
         http_response = Http::ResponseMock.new
 
@@ -193,7 +193,7 @@ module Tilia
         server = ServerMock.new(root)
         http_request = Http::Sapi.create_from_server_array(
           'HTTP_IF_MODIFIED_SINCE' => 'Sun, 06 Nov 1994 08:49:37 EST',
-          'REQUEST_PATH'  => '/foo'
+          'PATH_INFO'     => '/foo'
         )
         http_response = Http::ResponseMock.new
         assert(server.check_preconditions(http_request, http_response))
@@ -204,7 +204,7 @@ module Tilia
         server = ServerMock.new(root)
         http_request = Http::Sapi.create_from_server_array(
           'HTTP_IF_UNMODIFIED_SINCE' => 'Sun, 06 Nov 1994 08:49:37 GMT',
-          'REQUEST_PATH'  => '/foo'
+          'PATH_INFO'     => '/foo'
         )
         http_response = Http::Response.new
         assert(server.check_preconditions(http_request, http_response))
@@ -215,7 +215,7 @@ module Tilia
         server = ServerMock.new(root)
         http_request = Http::Sapi.create_from_server_array(
           'HTTP_IF_UNMODIFIED_SINCE' => 'Tue, 06 Nov 1984 08:49:37 GMT',
-          'REQUEST_PATH'  => '/foo'
+          'PATH_INFO'     => '/foo'
         )
         http_response = Http::ResponseMock.new
         assert_raises(Exception::PreconditionFailed) do
@@ -228,7 +228,7 @@ module Tilia
         server = ServerMock.new(root)
         http_request = Http::Sapi.create_from_server_array(
           'HTTP_IF_UNMODIFIED_SINCE' => 'Sun, 06 Nov 1984 08:49:37 CET',
-          'REQUEST_PATH'  => '/foo'
+          'PATH_INFO'     => '/foo'
         )
         http_response = Http::ResponseMock.new
         assert(server.check_preconditions(http_request, http_response))

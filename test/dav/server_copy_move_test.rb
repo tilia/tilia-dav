@@ -15,7 +15,7 @@ module Tilia
 
       def test_copy_over_write
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'COPY',
           'HTTP_DESTINATION' => '/test2.txt'
         }
@@ -38,7 +38,7 @@ module Tilia
 
       def test_copy_to_self
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'COPY',
           'HTTP_DESTINATION' => '/test.txt'
         }
@@ -53,7 +53,7 @@ module Tilia
 
       def test_non_existant_parent
         server_vars = {
-          'REQUEST_PATH'     => '/test.txt',
+          'PATH_INFO'        => '/test.txt',
           'REQUEST_METHOD'   => 'COPY',
           'HTTP_DESTINATION' => '/testcol2/test2.txt',
           'HTTP_OVERWRITE'   => 'F'
@@ -76,7 +76,7 @@ module Tilia
 
       def test_random_overwrite_header
         server_vars = {
-          'REQUEST_PATH'     => '/test.txt',
+          'PATH_INFO'        => '/test.txt',
           'REQUEST_METHOD'   => 'COPY',
           'HTTP_DESTINATION' => '/testcol2/test2.txt',
           'HTTP_OVERWRITE'   => 'SURE!'
@@ -91,7 +91,7 @@ module Tilia
 
       def test_copy_directory
         server_vars = {
-          'REQUEST_PATH'   => '/col',
+          'PATH_INFO'      => '/col',
           'REQUEST_METHOD' => 'COPY',
           'HTTP_DESTINATION' => '/col2'
         }
@@ -115,7 +115,7 @@ module Tilia
 
       def test_simple_copy_file
         server_vars = {
-          'REQUEST_PATH'   => '/test.txt',
+          'PATH_INFO'      => '/test.txt',
           'REQUEST_METHOD' => 'COPY',
           'HTTP_DESTINATION' => '/test3.txt'
         }
@@ -138,7 +138,7 @@ module Tilia
 
       def test_simple_copy_collection
         server_vars = {
-          'REQUEST_PATH'   => '/col',
+          'PATH_INFO'      => '/col',
           'REQUEST_METHOD' => 'COPY',
           'HTTP_DESTINATION' => '/col2'
         }

@@ -116,7 +116,7 @@ module Tilia
       def test_unknown_method_no_post
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PATCH',
-          'REQUEST_PATH'   => '/'
+          'PATH_INFO'      => '/'
         )
 
         response = request(request)
@@ -127,7 +127,7 @@ module Tilia
       def test_unknown_method_no_xml
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/',
+          'PATH_INFO'      => '/',
           'CONTENT_TYPE'   => 'text/plain'
         )
 
@@ -139,7 +139,7 @@ module Tilia
       def test_unknown_method_no_node
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/foo',
+          'PATH_INFO'      => '/foo',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -151,7 +151,7 @@ module Tilia
       def test_share_request
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1/cal1',
+          'PATH_INFO'      => '/calendars/user1/cal1',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -195,7 +195,7 @@ RRR
       def test_share_request_no_shareable_calendar
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1/cal2',
+          'PATH_INFO'      => '/calendars/user1/cal2',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -222,7 +222,7 @@ XML
       def test_invite_reply
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1',
+          'PATH_INFO'      => '/calendars/user1',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -242,7 +242,7 @@ XML
       def test_invite_bad_xml
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1',
+          'PATH_INFO'      => '/calendars/user1',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -259,7 +259,7 @@ XML
       def test_invite_wrong_url
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1/cal1',
+          'PATH_INFO'      => '/calendars/user1/cal1',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -282,7 +282,7 @@ XML
       def test_publish
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1/cal1',
+          'PATH_INFO'      => '/calendars/user1/cal1',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -300,7 +300,7 @@ XML
       def test_unpublish
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1/cal1',
+          'PATH_INFO'      => '/calendars/user1/cal1',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -318,7 +318,7 @@ XML
       def test_publish_wrong_url
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1/cal2',
+          'PATH_INFO'      => '/calendars/user1/cal2',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -336,7 +336,7 @@ XML
       def test_unpublish_wrong_url
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1/cal2',
+          'PATH_INFO'      => '/calendars/user1/cal2',
           'CONTENT_TYPE'   => 'text/xml'
         )
 
@@ -354,7 +354,7 @@ XML
       def test_unknown_xml_doc
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'POST',
-          'REQUEST_PATH'   => '/calendars/user1/cal2',
+          'PATH_INFO'      => '/calendars/user1/cal2',
           'CONTENT_TYPE'   => 'text/xml'
         )
 

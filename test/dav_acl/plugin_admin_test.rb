@@ -24,7 +24,7 @@ module Tilia
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'OPTIONS',
           'HTTP_DEPTH'     => 1,
-          'REQUEST_PATH'   => '/adminonly'
+          'PATH_INFO'      => '/adminonly'
         )
 
         response = Http::ResponseMock.new
@@ -44,7 +44,7 @@ module Tilia
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'OPTIONS',
           'HTTP_DEPTH'     => 1,
-          'REQUEST_PATH'   => '/adminonly'
+          'PATH_INFO'      => '/adminonly'
         )
 
         response = Http::ResponseMock.new

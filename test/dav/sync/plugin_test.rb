@@ -124,7 +124,7 @@ BLA
 
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'REPORT',
-            'REQUEST_PATH'   => '/coll/',
+            'PATH_INFO'      => '/coll/',
             'CONTENT_TYPE'    => 'application/xml'
           )
 
@@ -184,7 +184,7 @@ BLA
 
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'REPORT',
-            'REQUEST_PATH'   => '/coll/',
+            'PATH_INFO'      => '/coll/',
             'CONTENT_TYPE'    => 'application/xml'
           )
 
@@ -232,7 +232,7 @@ BLA
 
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'REPORT',
-            'REQUEST_PATH'   => '/coll/',
+            'PATH_INFO'      => '/coll/',
             'CONTENT_TYPE'   => 'application/xml',
             'HTTP_DEPTH'     => '1'
           )
@@ -286,7 +286,7 @@ BLA
         def test_sync_no_sync_info
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'REPORT',
-            'REQUEST_PATH'   => '/coll/',
+            'PATH_INFO'      => '/coll/',
             'CONTENT_TYPE'    => 'application/xml'
           )
 
@@ -313,7 +313,7 @@ BLA
         def test_sync_no_sync_collection
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'REPORT',
-            'REQUEST_PATH'   => '/normalcoll/',
+            'PATH_INFO'      => '/normalcoll/',
             'CONTENT_TYPE'    => 'application/xml'
           )
 
@@ -341,7 +341,7 @@ BLA
           @collection.add_change(['file1.txt'], [], [])
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'REPORT',
-            'REQUEST_PATH'   => '/coll/',
+            'PATH_INFO'      => '/coll/',
             'CONTENT_TYPE'    => 'application/xml'
           )
 
@@ -369,7 +369,7 @@ BLA
           @collection.add_change(['file1.txt'], [], [])
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'REPORT',
-            'REQUEST_PATH'   => '/coll/',
+            'PATH_INFO'      => '/coll/',
             'CONTENT_TYPE'    => 'application/xml'
           )
 
@@ -396,7 +396,7 @@ BLA
         def test_sync_no_sync_token
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'REPORT',
-            'REQUEST_PATH'   => '/coll/',
+            'PATH_INFO'      => '/coll/',
             'CONTENT_TYPE'    => 'application/xml'
           )
 
@@ -423,7 +423,7 @@ BLA
           @collection.add_change(['file1.txt'], [], [])
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'REPORT',
-            'REQUEST_PATH'   => '/coll/',
+            'PATH_INFO'      => '/coll/',
             'CONTENT_TYPE'   => 'application/xml'
           )
 
@@ -448,7 +448,7 @@ BLA
           @collection.add_change(['file1.txt'], [], [])
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'DELETE',
-            'REQUEST_PATH'   => '/coll/file1.txt',
+            'PATH_INFO'      => '/coll/file1.txt',
             'HTTP_IF'        => '</coll> (<http://sabre.io/ns/sync/1>)'
           )
           response = request(request)
@@ -463,7 +463,7 @@ BLA
           @collection.add_change(['file1.txt'], [], [])
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'DELETE',
-            'REQUEST_PATH'   => '/coll/file1.txt',
+            'PATH_INFO'      => '/coll/file1.txt',
             'HTTP_IF'        => '</coll> (Not <http://sabre.io/ns/sync/2>)'
           )
           response = request(request)
@@ -478,7 +478,7 @@ BLA
           @collection.add_change(['file1.txt'], [], [])
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'DELETE',
-            'REQUEST_PATH'   => '/coll/file1.txt',
+            'PATH_INFO'      => '/coll/file1.txt',
             'HTTP_IF'        => '</coll> (<opaquelocktoken:foo>)'
           )
           response = request(request)

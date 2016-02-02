@@ -28,7 +28,7 @@ module Tilia
       def test_create_file
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
 
         response = request(request)
@@ -39,7 +39,7 @@ module Tilia
       def test_create_file_valid
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
         request.body = "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nUID:foo\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
 
@@ -68,7 +68,7 @@ module Tilia
       def test_create_file_no_components
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
         request.body = "BEGIN:VCALENDAR\r\nEND:VCALENDAR\r\n"
 
@@ -80,7 +80,7 @@ module Tilia
       def test_create_file_no_uid
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
         request.body = "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
 
@@ -92,7 +92,7 @@ module Tilia
       def test_create_file_v_card
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
         request.body = "BEGIN:VCARD\r\nEND:VCARD\r\n"
 
@@ -104,7 +104,7 @@ module Tilia
       def test_create_file2_components
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
         request.body = "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nUID:foo\r\nEND:VEVENT\r\nBEGIN:VJOURNAL\r\nUID:foo\r\nEND:VJOURNAL\r\nEND:VCALENDAR\r\n"
 
@@ -116,7 +116,7 @@ module Tilia
       def test_create_file2_uids
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
         request.body = "BEGIN:VCALENDAR\r\nBEGIN:VTIMEZONE\r\nEND:VTIMEZONE\r\nBEGIN:VEVENT\r\nUID:foo\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nUID:bar\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
 
@@ -128,7 +128,7 @@ module Tilia
       def test_create_file_wrong_componen
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
         request.body = "BEGIN:VCALENDAR\r\nBEGIN:VTIMEZONE\r\nEND:VTIMEZONE\r\nBEGIN:VFREEBUSY\r\nUID:foo\r\nEND:VFREEBUSY\r\nEND:VCALENDAR\r\n"
 
@@ -141,7 +141,7 @@ module Tilia
         @caldav_backend.create_calendar_object('calendar1', 'blabla.ics', 'foo')
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
 
         response = request(request)
@@ -153,7 +153,7 @@ module Tilia
         @caldav_backend.create_calendar_object('calendar1', 'blabla.ics', 'foo')
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
         body = "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nUID:foo\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
         request.body = body
@@ -175,7 +175,7 @@ module Tilia
       def test_create_file_invalid_component
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar2/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar2/blabla.ics'
         )
         request.body = "BEGIN:VCALENDAR\r\nBEGIN:VTIMEZONE\r\nEND:VTIMEZONE\r\nBEGIN:VEVENT\r\nUID:foo\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
 
@@ -188,7 +188,7 @@ module Tilia
         @caldav_backend.create_calendar_object('calendar2', 'blabla.ics', 'foo')
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar2/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar2/blabla.ics'
         )
         request.body = "BEGIN:VCALENDAR\r\nBEGIN:VTIMEZONE\r\nEND:VTIMEZONE\r\nBEGIN:VEVENT\r\nUID:foo\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
 
@@ -205,7 +205,7 @@ module Tilia
       def test_create_file_modified
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/calendars/admin/calendar1/blabla.ics'
+          'PATH_INFO'    => '/calendars/admin/calendar1/blabla.ics'
         )
         request.body = "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nUID:foo\r\nSUMMARY:Meeting in M\xfcnster\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
 

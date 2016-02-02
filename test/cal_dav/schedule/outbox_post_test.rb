@@ -16,7 +16,7 @@ module Tilia
         def test_post_pass_thru_not_found
           req = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'POST',
-            'REQUEST_PATH' => '/notfound',
+            'PATH_INFO'    => '/notfound',
             'HTTP_CONTENT_TYPE' => 'text/calendar'
           )
 
@@ -26,7 +26,7 @@ module Tilia
         def test_post_pass_thru_not_text_calendar
           req = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'POST',
-            'REQUEST_PATH' => '/calendars/user1/outbox'
+            'PATH_INFO'    => '/calendars/user1/outbox'
           )
 
           assert_http_status(501, req)
@@ -35,7 +35,7 @@ module Tilia
         def test_post_pass_thru_no_out_box
           req = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD' => 'POST',
-            'REQUEST_PATH' => '/calendars',
+            'PATH_INFO'    => '/calendars',
             'HTTP_CONTENT_TYPE' => 'text/calendar'
           )
 
@@ -45,7 +45,7 @@ module Tilia
         def test_invalid_ical_body
           req = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD'  => 'POST',
-            'REQUEST_PATH'    => '/calendars/user1/outbox',
+            'PATH_INFO'       => '/calendars/user1/outbox',
             'HTTP_ORIGINATOR' => 'mailto:user1.sabredav@sabredav.org',
             'HTTP_RECIPIENT'  => 'mailto:user2@example.org',
             'HTTP_CONTENT_TYPE' => 'text/calendar'
@@ -58,7 +58,7 @@ module Tilia
         def test_no_vevent
           req = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD'  => 'POST',
-            'REQUEST_PATH'    => '/calendars/user1/outbox',
+            'PATH_INFO'       => '/calendars/user1/outbox',
             'HTTP_ORIGINATOR' => 'mailto:user1.sabredav@sabredav.org',
             'HTTP_RECIPIENT'  => 'mailto:user2@example.org',
             'HTTP_CONTENT_TYPE' => 'text/calendar'
@@ -79,7 +79,7 @@ ICS
         def test_no_method
           req = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD'  => 'POST',
-            'REQUEST_PATH'    => '/calendars/user1/outbox',
+            'PATH_INFO'       => '/calendars/user1/outbox',
             'HTTP_ORIGINATOR' => 'mailto:user1.sabredav@sabredav.org',
             'HTTP_RECIPIENT'  => 'mailto:user2@example.org',
             'HTTP_CONTENT_TYPE' => 'text/calendar'
@@ -100,7 +100,7 @@ ICS
         def test_unsupported_method
           req = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD'  => 'POST',
-            'REQUEST_PATH'    => '/calendars/user1/outbox',
+            'PATH_INFO'       => '/calendars/user1/outbox',
             'HTTP_ORIGINATOR' => 'mailto:user1.sabredav@sabredav.org',
             'HTTP_RECIPIENT'  => 'mailto:user2@example.org',
             'HTTP_CONTENT_TYPE' => 'text/calendar'

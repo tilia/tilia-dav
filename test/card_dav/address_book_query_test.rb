@@ -6,7 +6,7 @@ module Tilia
       def test_query
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'REPORT',
-          'REQUEST_PATH'   => '/addressbooks/user1/book1',
+          'PATH_INFO'      => '/addressbooks/user1/book1',
           'HTTP_DEPTH'     => '1'
         )
 
@@ -56,7 +56,7 @@ XML
       def test_query_depth0
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'REPORT',
-          'REQUEST_PATH' => '/addressbooks/user1/book1/card1',
+          'PATH_INFO'    => '/addressbooks/user1/book1/card1',
           'HTTP_DEPTH' => '0'
         )
 
@@ -101,7 +101,7 @@ BODY
       def test_query_no_match
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'REPORT',
-          'REQUEST_PATH' => '/addressbooks/user1/book1',
+          'PATH_INFO'    => '/addressbooks/user1/book1',
           'HTTP_DEPTH' => '1'
         )
 
@@ -137,7 +137,7 @@ BODY
       def test_query_limit
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'REPORT',
-          'REQUEST_PATH' => '/addressbooks/user1/book1',
+          'PATH_INFO'    => '/addressbooks/user1/book1',
           'HTTP_DEPTH' => '1'
         )
 

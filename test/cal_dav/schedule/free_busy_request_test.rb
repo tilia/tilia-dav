@@ -522,7 +522,7 @@ ICS
           @server.http_request = Http::Sapi.create_from_server_array(
             'CONTENT_TYPE' => 'text/calendar',
             'REQUEST_METHOD' => 'POST',
-            'REQUEST_PATH' => '/calendars/user1/outbox'
+            'PATH_INFO'    => '/calendars/user1/outbox'
           )
 
           body = <<ICS

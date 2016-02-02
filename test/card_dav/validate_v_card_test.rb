@@ -38,7 +38,7 @@ module Tilia
       def test_create_file
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/addressbooks/admin/addressbook1/blabla.vcf'
+          'PATH_INFO'    => '/addressbooks/admin/addressbook1/blabla.vcf'
         )
 
         response = request(request)
@@ -49,7 +49,7 @@ module Tilia
       def test_create_file_valid
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/addressbooks/admin/addressbook1/blabla.vcf'
+          'PATH_INFO'    => '/addressbooks/admin/addressbook1/blabla.vcf'
         )
         request.body = "BEGIN:VCARD\r\nUID:foo\r\nEND:VCARD\r\n"
 
@@ -97,7 +97,7 @@ module Tilia
       def test_create_file_v_calendar
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/addressbooks/admin/addressbook1/blabla.vcf'
+          'PATH_INFO'    => '/addressbooks/admin/addressbook1/blabla.vcf'
         )
         request.body = "BEGIN:VCALENDAR\r\nEND:VCALENDAR\r\n"
 
@@ -110,7 +110,7 @@ module Tilia
         @card_backend.create_card('addressbook1', 'blabla.vcf', 'foo')
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/addressbooks/admin/addressbook1/blabla.vcf'
+          'PATH_INFO'    => '/addressbooks/admin/addressbook1/blabla.vcf'
         )
 
         response = request(request)
@@ -122,7 +122,7 @@ module Tilia
         @card_backend.create_card('addressbook1', 'blabla.vcf', 'foo')
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH' => '/addressbooks/admin/addressbook1/blabla.vcf'
+          'PATH_INFO'    => '/addressbooks/admin/addressbook1/blabla.vcf'
         )
         body = "BEGIN:VCARD\r\nUID:foo\r\nEND:VCARD\r\n"
         request.body = body

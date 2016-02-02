@@ -11,7 +11,7 @@ module Tilia
 
         def test_collection_get
           server_vars = {
-            'REQUEST_PATH'   => '/',
+            'PATH_INFO'      => '/',
             'REQUEST_METHOD' => 'GET'
           }
 

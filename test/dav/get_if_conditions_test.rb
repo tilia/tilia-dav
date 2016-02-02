@@ -33,7 +33,7 @@ module Tilia
       def test_not_lock_token
         server_vars = {
           'HTTP_IF'      => '(Not <opaquelocktoken:token1>)',
-          'REQUEST_PATH' => '/bla'
+          'PATH_INFO'    => '/bla'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -84,7 +84,7 @@ module Tilia
       def test2_lock_tokens
         server_vars = {
           'HTTP_IF'      => '(<opaquelocktoken:token1>) (Not <opaquelocktoken:token2>)',
-          'REQUEST_PATH' => '/bla'
+          'PATH_INFO'    => '/bla'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)
@@ -187,7 +187,7 @@ module Tilia
       def test_etag
         server_vars = {
           'HTTP_IF'      => '(["etag1"])',
-          'REQUEST_PATH' => '/foo'
+          'PATH_INFO'    => '/foo'
         }
 
         request = Http::Sapi.create_from_server_array(server_vars)

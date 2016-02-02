@@ -105,7 +105,7 @@ module Tilia
       def test_propfind_minimal
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PROPFIND',
-          'REQUEST_PATH'   => '/',
+          'PATH_INFO'      => '/',
           'HTTP_PREFER'    => 'return-minimal'
         )
         request.body = <<BLA

@@ -212,7 +212,7 @@ XML
       def test_mk_calendar_existing_calendar
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'MKCALENDAR',
-          'REQUEST_PATH'   => '/calendars/user1/UUID-123467'
+          'PATH_INFO'      => '/calendars/user1/UUID-123467'
         )
 
         body = <<XML

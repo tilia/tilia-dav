@@ -273,33 +273,7 @@ module Tilia
       #
       # @return string
       def guess_base_uri
-        path_info = @http_request.raw_server_value('PATH_INFO') || ''
-        uri = @http_request.raw_server_value('REQUEST_PATH') || ''
-
-        # If PATH_INFO is found, we can assume it's accurate.
-        unless path_info.blank?
-          # We need to make sure we ignore the QUERY_STRING part
-          pos = uri.index('?')
-          uri = uri[0...pos] if pos
-
-          # PATH_INFO is only set for urls, such as: /example.php/path
-          # in that case PATH_INFO contains '/path'.
-          # Note that REQUEST_URI is percent encoded, while PATH_INFO is
-          # not, Therefore they are only comparable if we first decode
-          # REQUEST_INFO as well.
-          decoded_uri = Http::UrlUtil.decode_path(uri)
-
-          # A simple sanity check:
-          if decoded_uri[(decoded_uri.length - path_info.length)..-1] == path_info
-            base_uri = decoded_uri[0, decoded_uri.length - path_info.length]
-            return base_uri.gsub(%r{/+$}, '') + '/'
-          end
-
-          fail Exception, "The REQUEST_URI (#{uri}) did not end with the contents of PATH_INFO (#{path_info}). This server might be misconfigured."
-        end
-
-        # The last fallback is that we're just going to assume the server root.
-        '/'
+        "#{@http_request.raw_server_value('SCRIPT_NAME')}/"
       end
 
       # Adds a plugin to the server

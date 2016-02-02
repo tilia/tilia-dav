@@ -172,7 +172,7 @@ XML
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD'    => 'GET',
           'HTTP_CONTENT_TYPE' => 'application/xml',
-          'REQUEST_PATH'      => '/calendars/user1/calendar1',
+          'PATH_INFO'         => '/calendars/user1/calendar1',
           'HTTP_DEPTH'        => '1',
           'QUERY_STRING'      => 'export&start=1&end=2000000000&expand=1'
         )

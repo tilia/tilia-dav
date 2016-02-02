@@ -67,7 +67,7 @@ module Tilia
 
       def test_non_existant_method
         server_vars = {
-          'REQUEST_PATH'   => '/',
+          'PATH_INFO'      => '/',
           'REQUEST_METHOD' => 'BLABLA'
         }
 
@@ -88,7 +88,7 @@ module Tilia
 
       def test_base_uri
         server_vars = {
-          'REQUEST_PATH'   => '/blabla/test.txt',
+          'PATH_INFO'      => '/blabla/test.txt',
           'REQUEST_METHOD' => 'GET'
         }
         filename = ::File.join(@temp_dir, 'test.txt')
@@ -187,7 +187,7 @@ module Tilia
 
       def test_guess_base_uri
         server_vars = {
-          'REQUEST_PATH' => '/index.php/root',
+          'SCRIPT_NAME'  => '/index.php',
           'PATH_INFO'    => '/root'
         }
 
@@ -200,7 +200,7 @@ module Tilia
 
       def test_guess_base_uri_percent_encoding
         server_vars = {
-          'REQUEST_PATH' => '/index.php/dir/path2/path%20with%20spaces',
+          'SCRIPT_NAME'  => '/index.php',
           'PATH_INFO'    => '/dir/path2/path with spaces'
         }
 
@@ -214,7 +214,7 @@ module Tilia
       # def test_guess_base_uri_percent_encoding2
       #   skip('This behaviour is not yet implemented')
       #   server_vars = {
-      #     'REQUEST_PATH' => '/some%20directory+mixed/index.php/dir/path2/path%20with%20spaces',
+      #     'PATH_INFO'    => '/some%20directory+mixed/index.php/dir/path2/path%20with%20spaces',
       #     'PATH_INFO'    => '/dir/path2/path with spaces',
       #   }
       #
@@ -227,7 +227,7 @@ module Tilia
 
       def test_guess_base_uri2
         server_vars = {
-          'REQUEST_PATH' => '/index.php/root/',
+          'SCRIPT_NAME' => '/index.php',
           'PATH_INFO'    => '/root/'
         }
 
@@ -240,7 +240,7 @@ module Tilia
 
       def test_guess_base_uri_no_path_info
         server_vars = {
-          'REQUEST_PATH' => '/index.php/root'
+          'PATH_INFO'    => '/index.php/root'
         }
 
         http_request = Tilia::Http::Sapi.create_from_server_array(server_vars)
@@ -252,7 +252,7 @@ module Tilia
 
       def test_guess_base_uri_no_path_info2
         server_vars = {
-          'REQUEST_PATH' => '/a/b/c/test.php'
+          'PATH_INFO'    => '/a/b/c/test.php'
         }
 
         http_request = Tilia::Http::Sapi.create_from_server_array(server_vars)
@@ -264,7 +264,8 @@ module Tilia
 
       def test_guess_base_uri_query_string
         server_vars = {
-          'REQUEST_PATH' => '/index.php/root?query_string=blabla',
+          'SCRIPT_NAME' => '/index.php',
+          'QUERY_STRING' => 'query_string=blabla',
           'PATH_INFO'    => '/root'
         }
 
@@ -275,22 +276,24 @@ module Tilia
         assert_equal('/index.php/', server.guess_base_uri)
       end
 
-      def test_guess_base_uri_bad_config
-        server_vars = {
-          'REQUEST_PATH' => '/index.php/root/heyyy',
-          'PATH_INFO'    => '/root'
-        }
-
-        http_request = Tilia::Http::Sapi.create_from_server_array(server_vars)
-        server = Tilia::Dav::ServerMock.new
-        server.http_request = http_request
-
-        assert_raises(Exception) { server.guess_base_uri }
-      end
+      # Using RACKs environment ...
+      # def test_guess_base_uri_bad_config
+      #   skip()
+      #   server_vars = {
+      #     'PATH_INFO'    => '/index.php/root/heyyy',
+      #     'PATH_INFO'    => '/root'
+      #   }
+      #
+      #   http_request = Tilia::Http::Sapi.create_from_server_array(server_vars)
+      #   server = Tilia::Dav::ServerMock.new
+      #   server.http_request = http_request
+      #
+      #   assert_raises(Exception) { server.guess_base_uri }
+      # end
 
       def test_trigger_exception
         server_vars = {
-          'REQUEST_PATH'   => '/',
+          'PATH_INFO'      => '/',
           'REQUEST_METHOD' => 'FOO'
         }
 
@@ -315,7 +318,7 @@ module Tilia
 
       def test_report_not_found
         server_vars = {
-          'REQUEST_PATH'   => '/',
+          'PATH_INFO'      => '/',
           'REQUEST_METHOD' => 'REPORT'
         }
 
@@ -337,7 +340,7 @@ module Tilia
 
       def test_report_intercepted
         server_vars = {
-          'REQUEST_PATH'   => '/',
+          'PATH_INFO'      => '/',
           'REQUEST_METHOD' => 'REPORT'
         }
 

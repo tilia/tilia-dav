@@ -33,7 +33,7 @@ module Tilia
 
       def test_export
         request = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH'   => '/addressbooks/user1/book1',
+          'PATH_INFO'      => '/addressbooks/user1/book1',
           'QUERY_STRING'   => 'export',
           'REQUEST_METHOD' => 'GET'
         )

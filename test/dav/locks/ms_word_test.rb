@@ -59,7 +59,7 @@ module Tilia
             'REQUEST_METHOD'    => 'LOCK',
             'HTTP_CONTENT_TYPE' => 'application/xml',
             'HTTP_TIMEOUT'      => 'Second-3600',
-            'REQUEST_PATH'      => '/Nouveau%20Microsoft%20Office%20Excel%20Worksheet.xlsx'
+            'PATH_INFO'         => '/Nouveau%20Microsoft%20Office%20Excel%20Worksheet.xlsx'
           )
 
           request.body = <<XML
@@ -84,7 +84,7 @@ XML
             'REQUEST_METHOD'    => 'LOCK',
             'HTTP_CONTENT_TYPE' => 'application/xml',
             'HTTP_TIMEOUT'      => 'Second-3600',
-            'REQUEST_PATH'      => '/~$Nouveau%20Microsoft%20Office%20Excel%20Worksheet.xlsx'
+            'PATH_INFO'         => '/~$Nouveau%20Microsoft%20Office%20Excel%20Worksheet.xlsx'
           )
 
           request.body = <<XML
@@ -107,7 +107,7 @@ XML
         def get_put_request(lock_token)
           request = Http::Sapi.create_from_server_array(
             'REQUEST_METHOD'    => 'PUT',
-            'REQUEST_PATH'      => '/Nouveau%20Microsoft%20Office%20Excel%20Worksheet.xlsx',
+            'PATH_INFO'         => '/Nouveau%20Microsoft%20Office%20Excel%20Worksheet.xlsx',
             'HTTP_IF'           => "If: (#{lock_token})"
           )
           request.body = 'FAKE BODY'

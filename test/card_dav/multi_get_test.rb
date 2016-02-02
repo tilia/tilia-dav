@@ -6,7 +6,7 @@ module Tilia
       def test_multi_get
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'REPORT',
-          'REQUEST_PATH'   => '/addressbooks/user1/book1'
+          'PATH_INFO'      => '/addressbooks/user1/book1'
         )
 
         request.body = <<BODY
@@ -50,7 +50,7 @@ BODY
       def test_multi_get_v_card4
         request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'REPORT',
-          'REQUEST_PATH'   => '/addressbooks/user1/book1'
+          'PATH_INFO'      => '/addressbooks/user1/book1'
         )
 
         request.body = <<BODY

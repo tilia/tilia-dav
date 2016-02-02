@@ -23,7 +23,7 @@ module Tilia
 
         @server.http_request = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD'    => 'GET',
-          'REQUEST_PATH'      => '/test.txt'
+          'PATH_INFO'         => '/test.txt'
         )
 
         @server.exec
@@ -36,7 +36,7 @@ module Tilia
         # Also testing put
         req = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'PUT',
-          'REQUEST_PATH'   => '/barbar'
+          'PATH_INFO'      => '/barbar'
         )
 
         @server.http_request = req
@@ -54,7 +54,7 @@ module Tilia
 
         req = Http::Sapi.create_from_server_array(
           'REQUEST_METHOD' => 'GET',
-          'REQUEST_PATH'   => '/not/exisitng'
+          'PATH_INFO'      => '/not/exisitng'
         )
         @server.http_request = req
         @server.exec

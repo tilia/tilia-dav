@@ -31,7 +31,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export'
         )
@@ -82,7 +82,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export'
         )
@@ -120,7 +120,7 @@ module Tilia
         server.add_plugin(plugin)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET'
         )
         assert(plugin.http_get(h, server.http_response))
@@ -146,7 +146,7 @@ module Tilia
         server.add_plugin(DavAcl::Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'QUERY_STRING' => 'export'
         )
 
@@ -188,7 +188,7 @@ module Tilia
         server.plugin('acl').admin_principals = ['principals/admin']
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export'
         )
@@ -239,7 +239,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export&start=foo'
         )
@@ -274,7 +274,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export&end=foo'
         )
@@ -309,7 +309,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export&start=1&end=2'
         )
@@ -348,7 +348,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export&expand=1&end=1'
         )
@@ -383,7 +383,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export&start=1&end=2000000000&expand=1'
         )
@@ -422,7 +422,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'HTTP_ACCEPT' => 'application/calendar+json',
           'QUERY_STRING' => 'export'
@@ -459,7 +459,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export&accept=jcal'
         )
@@ -495,7 +495,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'HTTP_ACCEPT' => 'text/plain',
           'QUERY_STRING' => 'export'
@@ -535,7 +535,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export&componentType=VEVENT'
         )
@@ -578,7 +578,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export&componentType=VTODO'
         )
@@ -621,7 +621,7 @@ module Tilia
         server.add_plugin(Plugin.new)
 
         h = Http::Sapi.create_from_server_array(
-          'REQUEST_PATH' => '/UUID-123467',
+          'PATH_INFO'    => '/UUID-123467',
           'REQUEST_METHOD' => 'GET',
           'QUERY_STRING' => 'export&componentType=VVOODOO'
         )

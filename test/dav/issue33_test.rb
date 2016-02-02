@@ -19,7 +19,7 @@ module Tilia
         server.base_uri = '/webdav/'
 
         server_vars = {
-          'REQUEST_PATH'     => '/webdav/bar',
+          'PATH_INFO'        => '/webdav/bar',
           'HTTP_DESTINATION' => 'http://dev2.tribalos.com/webdav/%C3%A0fo%C3%B3',
           'HTTP_OVERWRITE'   => 'F'
         }
@@ -58,7 +58,7 @@ module Tilia
         # Request object
         server_vars = {
           'REQUEST_METHOD'   => 'MOVE',
-          'REQUEST_PATH'     => '/webdav/bar',
+          'PATH_INFO'        => '/webdav/bar',
           'HTTP_DESTINATION' => 'http://dev2.tribalos.com/webdav/%C3%A0fo%C3%B3',
           'HTTP_OVERWRITE'   => 'F'
         }
