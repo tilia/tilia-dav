@@ -1,6 +1,6 @@
 require File.join(File.dirname(__FILE__), 'lib', 'tilia', 'dav', 'version')
 Gem::Specification.new do |s|
-  s.name        = 'tilia_dav'
+  s.name        = 'tilia-dav'
   s.version     = Tilia::Dav::Version::VERSION
   s.licenses    = ['BSD-3-Clause']
   s.summary     = 'Port of the sabre-dav library to ruby'
@@ -10,11 +10,11 @@ Gem::Specification.new do |s|
   s.files       = `git ls-files`.split("\n")
   s.homepage    = 'https://github.com/tilia/tilia-dav'
 
-  s.add_runtime_dependency 'tilia_vobject', '>= 4.0.0-alpha1'
-  s.add_runtime_dependency 'tilia_event', '~> 2.0'
-  s.add_runtime_dependency 'tilia_xml', '~> 1.2'
-  s.add_runtime_dependency 'tilia_http', '~> 4.1'
-  s.add_runtime_dependency 'tilia_uri', '~> 1.0'
+  s.add_runtime_dependency 'tilia-vobject', '>= 4.0.0-alpha4'
+  s.add_runtime_dependency 'tilia-event', '~> 2.0'
+  s.add_runtime_dependency 'tilia-xml', '~> 1.2'
+  s.add_runtime_dependency 'tilia-http', '~> 4.1'
+  s.add_runtime_dependency 'tilia-uri', '~> 1.0'
 
   # External dependencies
   s.add_runtime_dependency 'activesupport', '~> 4.2'
