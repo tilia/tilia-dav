@@ -201,7 +201,7 @@ module Tilia
         # Setting the base url
         @http_request.base_url = base_uri
         invoke_method(@http_request, @http_response)
-      rescue Exception => e # use Exception (without ::) for easier debugging
+      rescue ::Exception => e # use Exception (without ::) for easier debugging
         begin
           emit('exception', [e])
         rescue
@@ -224,25 +224,13 @@ module Tilia
 
         error << LibXML::XML::Node.new('s:exception', h.call(e.class.to_s))
         error << LibXML::XML::Node.new('s:message', h.call(e.message))
-        if @debug_exceptions
-          #             writer.write_element('s:file', h.call(e.get_file))
-          #             writer.write_element('s:line', h.call(e.get_line))
-          #             writer.write_element('s:code', h.call(e.get_code))
-          #             writer.write_element('s:stacktrace', h.call(e.get_trace_as_string))
-        end
 
         if @debug_exceptions
-          #             previous = e
-          #             while previous = previous.get_previous
-          #               x_previous = $DOM.create_element('s:previous-exception')
-          #               x_previous.append_child($DOM.create_element('s:exception', h.call(get_class(previous))))
-          #               x_previous.append_child($DOM.create_element('s:message', h.call(previous.get_message)))
-          #               x_previous.append_child($DOM.create_element('s:file', h.call(previous.get_file)))
-          #               x_previous.append_child($DOM.create_element('s:line', h.call(previous.get_line)))
-          #               x_previous.append_child($DOM.create_element('s:code', h.call(previous.get_code)))
-          #               x_previous.append_child($DOM.create_element('s:stacktrace', h.call(previous.get_trace_as_string)))
-          #               error.append_child(x_previous)
-          #             end
+          backtrace_node = LibXML::XML::Node.new('s:backtrace')
+          e.backtrace.each do |entry|
+            backtrace_node << LibXML::XML::Node.new('s:entry', entry)
+          end
+          error << backtrace_node
         end
 
         if e.is_a?(Exception)
