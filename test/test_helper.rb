@@ -30,7 +30,7 @@ module Minitest
 
     def assert_v_object_equals(expected, actual, message = nil)
       get_obj = lambda do |input|
-        input = input.readlines.join("\n") if input.respond_to?(:readlines)
+        input = input.read if input.respond_to?(:read)
 
         input = Tilia::VObject::Reader.read(input) if input.is_a?(String)
 

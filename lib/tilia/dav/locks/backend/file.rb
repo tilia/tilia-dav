@@ -111,7 +111,7 @@ module Tilia
             handle.flock(::File::LOCK_SH)
 
             # Reading data until the eof
-            data = handle.readlines.join('')
+            data = handle.read
 
             # We're all good
             handle.flock(::File::LOCK_UN)

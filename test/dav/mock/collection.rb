@@ -71,7 +71,7 @@ module Tilia
         # @param resource|string data Initial payload
         # @return null|string
         def create_file(name, data = nil)
-          data = data.readlines.join('') if data.respond_to?(:readlines)
+          data = data.read unless data.is_a?(String)
 
           @children << File.new(name, data, self)
           "\"#{Digest::MD5.hexdigest(data)}\""

@@ -19,7 +19,7 @@ module Tilia
         assert_equal(201, @response.status)
         assert_equal('0', @response.header('Content-Length'))
 
-        assert_equal('Testing new file', ::File.readlines(::File.join(@temp_dir, 'testput.txt')).join(''))
+        assert_equal('Testing new file', ::File.read(::File.join(@temp_dir, 'testput.txt')))
       end
 
       def test_put_temp

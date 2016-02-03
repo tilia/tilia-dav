@@ -55,7 +55,7 @@ module Tilia
         # @param resource data
         # @return string|null
         def put(data)
-          data = data.readlines.join('') if data.respond_to?(:readlines)
+          data = data.read unless data.is_a?(String)
 
           @contents = data
           "\"#{Digest::MD5.hexdigest(data)}\""
