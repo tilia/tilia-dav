@@ -3,6 +3,7 @@
 
 # database connection file
 /database.yml
+/examples/database.yml
 
 # backup files
 *~
@@ -23,3 +24,4 @@
 
 # Example server roots
 /examples/*test_root
+/examples/*test_tmp

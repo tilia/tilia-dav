@@ -163,7 +163,7 @@ module Tilia
 
           assert_equal(204, @response.status)
           assert_equal('', @response.body_as_string)
-          refute(::File.exist?("#{@temp_dir}/col"))
+          refute(::File.exist?("#{@temp_dir}/testcol"))
         end
 
         def test_options

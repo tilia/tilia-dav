@@ -42,7 +42,7 @@ module Tilia
         @server.http_request = req
         @server.exec
 
-        assert_equal(nil, @server.http_response.status)
+        assert_equal(500, @server.http_response.status)
       end
 
       def before_bind_cancel_handler(_path)
@@ -85,11 +85,13 @@ module Tilia
           end
         )
 
-        @server.invoke_method(
-          Http::Request.new('BLABLA', '/'),
-          Http::Response.new,
-          false
-        )
+        assert_raises(Exception) do
+          @server.invoke_method(
+            Http::Request.new('BLABLA', '/'),
+            Http::Response.new,
+            false
+          )
+        end
 
         assert_equal(2, k)
       end

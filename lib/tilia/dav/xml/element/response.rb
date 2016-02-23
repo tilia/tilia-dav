@@ -81,7 +81,9 @@ module Tilia
             if @http_status
               writer.write_element('{DAV:}status', "HTTP/1.1 #{@http_status} #{Tilia::Http::Response.status_codes[@http_status]}")
             end
-            writer.write_element('{DAV:}href', writer.context_uri + href)
+            writer.write_element('{DAV:}href', writer.context_uri + Http::encode_path(href))
+
+            empty = true
 
             @response_properties.each do |status, properties|
               # Skipping empty lists
@@ -90,10 +92,26 @@ module Tilia
               next if properties.blank?
               next if status.to_i.to_s != status.to_s
 
+              empty = false
+
               writer.start_element('{DAV:}propstat')
               writer.write_element('{DAV:}prop', properties)
               writer.write_element('{DAV:}status', "HTTP/1.1 #{status} #{Tilia::Http::Response.status_codes[status]}")
               writer.end_element # {DAV:}propstat
+            end
+
+            if empty
+              # The WebDAV spec _requires_ at least one DAV:propstat to appear for
+              # every DAV:response. In some circumstances however, there are no
+              # properties to encode.
+              #
+              # In those cases we MUST specify at least one DAV:propstat anyway, with
+              # no properties.
+              writer.write_element(
+                '{DAV:}propstat',
+                '{DAV:}prop'   => [],
+                '{DAV:}status' => "HTTP/1.1 418 #{Http::Response.status_codes[418]}"
+              )
             end
           end
 
@@ -173,7 +191,7 @@ module Tilia
                 status = elem['value']['{DAV:}status']
                 status = status.split(' ')[1]
                 properties = elem['value'].key?('{DAV:}prop') ? elem['value']['{DAV:}prop'] : []
-                property_lists[status] = properties
+                property_lists[status] = properties if properties.any?
               when '{DAV:}status'
                 status_code = elem['value'].split(' ')[1]
               end

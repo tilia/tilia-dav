@@ -182,7 +182,7 @@ module Tilia
       end
 
       if @setup_card_dav || @setup_cal_dav
-        @tree << DavAcl::PrincipalCollection.new(
+        @tree << CalDav::Principal::Collection.new(
           @principal_backend
         )
       end

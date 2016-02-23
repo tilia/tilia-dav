@@ -4,15 +4,6 @@ module Tilia
       module Backend
         # This is an authentication backend that uses a database to manage passwords.
         class Sequel < AbstractDigest
-          protected
-
-          # Reference to PDO connection
-          #
-          # @var PDO
-          attr_accessor :pdo
-
-          public
-
           # PDO table name we'll be using
           #
           # @var string
@@ -26,6 +17,8 @@ module Tilia
           def initialize(sequel)
             @sequel = sequel
             @table_name = 'users'
+
+            super()
           end
 
           # Returns the digest hash for a user.

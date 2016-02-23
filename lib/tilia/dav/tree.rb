@@ -49,7 +49,7 @@ module Tilia
           # Otherwise, we recursively grab the parent and ask him/her.
           parent = node_for_path(parent_name)
 
-          unless parent.is_a? ICollection
+          unless parent.is_a?(ICollection)
             fail Exception::NotFound, "Could not find node at path: #{path}"
           end
 
@@ -145,10 +145,11 @@ module Tilia
       def children(path)
         node = node_for_path(path)
         children = node.children
-        basePath = path.gsub(/^\/+|\/+$/, '') + '/'
+        base_path = path.gsub(/^\/+|\/+$/, '')
+        base_path += '/' unless base_path.blank?
 
         children.each do |child|
-          cache[basePath + child.name] = child
+          cache[base_path + child.name] = child
         end
 
         children

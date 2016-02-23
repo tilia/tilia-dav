@@ -5,23 +5,18 @@ module Tilia
       #
       # See the Collection in this directory for more details.
       class File < Dav::File
-        protected
-
-        attr_accessor :name
-        attr_accessor :contents
-        attr_accessor :parent
-
-        public
-
         # Creates the object
         #
         # @param string name
         # @param array children
         # @return void
-        def initialize(name, contents, parent = nil)
+        def initialize(name, contents, parent = nil, last_modified = -1)
           @name = name
           put(contents)
           @parent = parent
+
+          last_modified = Time.now.to_i if last_modified == -1
+          @last_modified = last_modified
         end
 
         # Returns the name of the node.
@@ -94,6 +89,12 @@ module Tilia
         def delete
           @parent.delete_child(@name)
         end
+
+        # Returns the last modification time as a unix timestamp.
+        # If the information is not available, return null.
+        #
+        # @return int
+        attr_reader :last_modified
       end
     end
   end

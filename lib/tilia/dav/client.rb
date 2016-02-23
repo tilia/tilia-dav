@@ -118,6 +118,8 @@ module Tilia
           add_curl_setting(:encoding, encodings.join(','))
         end
 
+        add_curl_setting(:useragent, "tilia-dav/#{Version::VERSION} (http://sabre.io/)")
+
         @xml = Xml::Service.new
         # BC
         @property_map = @xml.element_map
@@ -181,7 +183,7 @@ module Tilia
 
         response = send_request(request)
 
-        fail Exception, "HTTP error: #{response.status}" if response.status.to_i >= 400
+        fail Http::ClientHttpException.new(response) if response.status.to_i >= 400
 
         result = parse_multi_status(response.body_as_string)
 
@@ -207,7 +209,7 @@ module Tilia
       #
       # @param string url
       # @param array properties
-      # @return void
+      # @return bool
       def prop_patch(url, properties)
         prop_patch = Xml::Request::PropPatch.new
         prop_patch.properties = properties
@@ -220,7 +222,31 @@ module Tilia
           { 'Content-Type' => 'application/xml' },
           xml
         )
-        send_request(request)
+
+        response = send_request(request)
+
+        fail Http::ClientHttpException.new(response) if response.status.to_i >= 400
+
+        if response.status == 207.to_i
+          # If it's a 207, the request could still have failed, but the
+          # information is hidden in the response body.
+          result = parse_multi_status(response.body_as_string)
+
+          error_properties = []
+          result.each do |href, status_list|
+            status_list.each do |status, properties|
+              next unless status.to_i >= 400
+
+              properties.each do |prop_name, prop_value|
+                error_properties << "#{prop_name} (#{status})"
+              end
+            end
+          end
+
+          fail Http::ClientException, "ROPPATCH failed. The following properties errored: #{error_properties.join(', ')}" if error_properties.any?
+        end
+
+        true
       end
 
       # Performs an HTTP options request

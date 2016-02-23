@@ -589,12 +589,11 @@ module Tilia
 
         copy_info = @server.copy_and_move_info(request)
 
+        return false unless @server.emit('beforeBind', [copy_info['destination']])
         if copy_info['destinationExists']
           return false unless @server.emit('beforeUnbind', [copy_info['destination']])
           @server.tree.delete(copy_info['destination'])
         end
-
-        return false unless @server.emit('beforeBind', [copy_info['destination']])
 
         @server.tree.copy(path, copy_info['destination'])
 

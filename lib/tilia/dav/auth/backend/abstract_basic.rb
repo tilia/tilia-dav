@@ -108,8 +108,9 @@ module Tilia
           end
 
           # TODO: document
-          def initialize
-            @realm = 'sabre/dav'
+          def initialize *args
+            super
+            @realm = 'tilia/dav'
             @principal_prefix = 'principals/'
           end
         end

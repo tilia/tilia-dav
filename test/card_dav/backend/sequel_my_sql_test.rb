@@ -21,7 +21,7 @@ CREATE TABLE addressbooks (
   description VARCHAR(10000),
   synctoken INT(11) UNSIGNED NOT NULL DEFAULT '1',
   UNIQUE(principaluri(100), uri(100))
-) #{TestUtil.mysql_engine} DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) #{TestUtil.mysql_engine} DEFAULT CHARSET=utf8mb4
 QUERY
                 )
           db.run(<<QUERY
@@ -33,7 +33,7 @@ CREATE TABLE cards (
   lastmodified INT(11) UNSIGNED,
   etag VARBINARY(32),
   size INT(11) UNSIGNED NOT NULL
-) #{TestUtil.mysql_engine} DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) #{TestUtil.mysql_engine} DEFAULT CHARSET=utf8mb4
 QUERY
                 )
           db.run(<<QUERY
@@ -44,7 +44,7 @@ CREATE TABLE addressbookchanges (
   addressbookid INT(11) UNSIGNED NOT NULL,
   operation SMALLINT(2) NOT NULL,
   INDEX addressbookid_synctoken (addressbookid, synctoken)
-) #{TestUtil.mysql_engine} DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) #{TestUtil.mysql_engine} DEFAULT CHARSET=utf8mb4
 QUERY
                 )
 

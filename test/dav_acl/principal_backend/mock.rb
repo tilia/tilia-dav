@@ -36,7 +36,7 @@ module Tilia
 
           to_return = []
           @principals.each do |principal|
-            next if !prefix.blank? && principal['uri'].index(prefix) != 0
+            next if prefix.present? && principal['uri'].index(prefix) != 0
             to_return << principal
           end
 

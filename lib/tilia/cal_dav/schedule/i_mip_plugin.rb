@@ -71,8 +71,8 @@ module Tilia
 
           summary = i_tip_message.message['VEVENT']['SUMMARY'].to_s
 
-          return nil unless Uri.parse(i_tip_message.sender)['scheme'] == 'mailto'
-          return nil unless Uri.parse(i_tip_message.recipient)['scheme'] == 'mailto'
+          return nil unless Uri.parse(i_tip_message.sender)[:scheme] == 'mailto'
+          return nil unless Uri.parse(i_tip_message.recipient)[:scheme] == 'mailto'
 
           sender = i_tip_message.sender[7..-1]
           recipient = i_tip_message.recipient[7..-1]

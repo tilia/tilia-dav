@@ -198,22 +198,26 @@ module Tilia
         # @param array search_properties
         # @param string test
         # @return array
-        def search_principals(prefix_path, search_properties, _test = 'allof')
-          query = "SELECT uri FROM #{@table_name} WHERE 1=1 "
+        def search_principals(prefix_path, search_properties, test = 'allof')
+          return [] if search_properties.empty? # No criteria
+
+          query = "SELECT uri FROM #{@table_name} WHERE "
           values = []
 
           search_properties.each do |property, value|
             case property
             when '{DAV:}displayname'
-              query << ' AND displayname LIKE ?'
-              values << "%#{value}%"
+              column = 'displayname'
             when '{http://sabredav.org/ns}email-address'
-              query << ' AND email LIKE ?'
-              values << "%#{value}%"
+              column = 'email'
             else
               # Unsupported property
               return []
             end
+
+            query += test == 'anyof' ? ' OR ' : ' AND ' if values.any?
+            query += "lower(#{column}) LIKE lower(?)"
+            values << "%#{value}%"
           end
 
           principals = []
@@ -226,6 +230,46 @@ module Tilia
           end
 
           principals
+        end
+
+        # Finds a principal by its URI.
+        #
+        # This method may receive any type of uri, but mailto: addresses will be
+        # the most common.
+        #
+        # Implementation of this API is optional. It is currently used by the
+        # CalDAV system to find principals based on their email addresses. If this
+        # API is not implemented, some features may not work correctly.
+        #
+        # This method must return a relative principal path, or null, if the
+        # principal was not found or you refuse to find it.
+        #
+        # @param string uri
+        # @param string principal_prefix
+        # @return string, nil
+        def find_by_uri(uri, principal_prefix)
+          value = nil
+          scheme = nil
+          (scheme, value) = uri.split(":", 2)
+          return nil unless value
+
+          uri = nil
+          case scheme
+          when "mailto"
+            @sequel.fetch("SELECT uri FROM #{@table_name} WHERE lower(email)=lower(?)", [value]) do |row|
+              # Checking if the principal is in the prefix
+              row_prefix = Http::UrlUtil.split_path(row[:uri]).first
+              next unless row_prefix == principal_prefix
+
+              uri = row[:uri]
+              break # Stop on first match
+            end
+          else
+            #unsupported uri scheme
+            return nil
+          end
+
+          uri
         end
 
         # Returns the list of members for a group-principal

@@ -57,9 +57,7 @@ module Tilia
         # Returns the size of the node, in bytes
         #
         # @return int
-        def size
-          nil
-        end
+        attr_accessor :size
       end
     end
   end

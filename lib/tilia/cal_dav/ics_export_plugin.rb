@@ -223,7 +223,7 @@ module Tilia
             calendar_time_zone = ActiveSupport::TimeZone.new('UTC')
           end
 
-          merged_calendar.expand(start, ending, calendar_time_zone)
+          merged_calendar = merged_calendar.expand(start, ending, calendar_time_zone)
         end
 
         response.update_header('Content-Type', format)

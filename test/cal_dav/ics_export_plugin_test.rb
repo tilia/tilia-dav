@@ -8,6 +8,7 @@ module Tilia
         server = Dav::ServerMock.new
         server.add_plugin(plugin)
         assert_equal(plugin, server.plugin('ics-export'))
+        assert_equal('ics-export', plugin.plugin_info['name'])
       end
 
       def test_before_method

@@ -24,6 +24,20 @@ XML
             assert_xml_equal(expected, xml)
           end
 
+          def test_serialize_space
+            href = Href.new('path alsopath')
+            assert_equal('path alsopath', href.href)
+
+            @context_uri = '/bla/'
+            xml = write('{DAV:}anything' => href)
+
+            expected = <<XML
+<?xml version="1.0"?>
+<d:anything xmlns:d="DAV:"><d:href>/bla/path alsopath</d:href></d:anything>
+XML
+            assert_xml_equal(expected, xml)
+          end
+
           def test_serialize_no_prefix
             href = Tilia::Dav::Xml::Property::Href.new('path', false)
             assert_equal('path', href.href)

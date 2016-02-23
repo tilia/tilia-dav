@@ -327,10 +327,17 @@ module Tilia
 
         if emit("method:#{method}", [request, response])
           if emit('method', [request, response])
-            # Unsupported method
-            fail Exception::NotImplemented, "'There was no handler found for this \"#{method}\" method"
+            ex_message = "There was no plugin in the system that was willing to handle this #{method} method."
+            if method == "GET"
+              ex_message += " Enable the Browser plugin to get a better result here."
+            end
+
+             # Unsupported method
+            fail Exception::NotImplemented, ex_message
           end
         end
+
+        fail Exception, 'No subsystem set a valid HTTP status code. Something must have interrupted the request without providing further detail.' unless response.status
 
         return nil unless emit("afterMethod:#{method}", [request, response])
         return nil unless emit('afterMethod', [request, response])
@@ -381,7 +388,12 @@ module Tilia
         calculate_uri(@http_request.url)
       end
 
-      # Calculates the uri for a request, making sure that the base uri is stripped out
+      # Turns a URI such as the REQUEST_URI into a local path.
+      #
+      # This method:
+      #   * strips off the base path
+      #   * normalizes the path
+      #   * uri-decodes the path
       #
       # @param string uri
       # @throws Exception\Forbidden A permission denied exception is thrown whenever there was an attempt to supply a uri outside of the base uri
@@ -677,7 +689,7 @@ module Tilia
           sub_prop_find = prop_find.clone
           sub_prop_find.depth = new_depth
 
-          if path != ''
+          if path.present?
             sub_path = path + '/' + child_node.name
           else
             sub_path = child_node.name

@@ -386,6 +386,20 @@ module Tilia
 
         assert_equal(expected, result)
       end
+
+      # There are certain cases where no HTTP status may be set. We need to
+      # intercept these and set it to a default error message.
+      def test_no_http_status_set
+        @server.on(
+          'method:GET',
+          -> (request, response) { false },
+          1
+        )
+
+        @server.http_request = Http::Request.new('GET', '/')
+        @server.exec
+        assert_equal(500, @response.status)
+      end
     end
   end
 end

@@ -107,6 +107,9 @@ module Tilia
       #
       # @param string uri
       # @param resource data
+      # @param DAV\ICollection _parent_node
+      # @param bool _modified Should be set to true, if this event handler
+      #                       changed &data.
       # @return bool
       def before_create_file(uri, data, _parent, _modified)
         temp_path = temp_file?(uri)

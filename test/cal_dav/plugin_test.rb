@@ -593,7 +593,7 @@ XML
         utc = ActiveSupport::TimeZone.new('UTC')
         expected_ical = DatabaseUtil.get_test_calendar_data
         expected_ical = VObject::Reader.read(expected_ical)
-        expected_ical.expand(
+        expected_ical = expected_ical.expand(
           utc.parse('2011-01-01 00:00:00'),
           utc.parse('2011-12-31 23:59:59')
         )
@@ -651,7 +651,7 @@ XML
         utc = ActiveSupport::TimeZone.new('UTC')
         expected_ical = DatabaseUtil.get_test_calendar_data
         expected_ical = VObject::Reader.read(expected_ical)
-        expected_ical.expand(
+        expected_ical = expected_ical.expand(
           utc.parse('2000-01-01 00:00:00'),
           utc.parse('2010-12-31 23:59:59')
         )
@@ -711,7 +711,7 @@ XML
         utc = ActiveSupport::TimeZone.new('UTC')
         expected_ical = DatabaseUtil.get_test_calendar_data
         expected_ical = VObject::Reader.read(expected_ical)
-        expected_ical.expand(
+        expected_ical = expected_ical.expand(
           utc.parse('2000-01-01 00:00:00'),
           utc.parse('2010-12-31 23:59:59')
         )
@@ -865,7 +865,7 @@ XML
         utc = ActiveSupport::TimeZone.new('UTC')
         expected_ical = DatabaseUtil.get_test_calendar_data
         expected_ical = VObject::Reader.read(expected_ical)
-        expected_ical.expand(
+        expected_ical = expected_ical.expand(
           utc.parse('2000-01-01 00:00:00'),
           utc.parse('2010-12-31 23:59:59')
         )

@@ -28,7 +28,9 @@ module Tilia
       end
 
       def test_simple
-        assert_kind_of(VcfExportPlugin, @server.plugin('vcf-export'))
+        plugin = @server.plugin('vcf-export')
+        assert_kind_of(VcfExportPlugin, plugin)
+        assert_equal('vcf-export', plugin.plugin_info['name'])
       end
 
       def test_export
@@ -60,6 +62,14 @@ VCF
         expected = expected.gsub("\n", "\r\n")
 
         assert_equal(expected, response.body_as_string)
+      end
+
+      def test_browser_integration
+        plugin = @server.plugin('vcf-export')
+        actions = Box.new('')
+        addressbook = AddressBook.new(@carddav_backend, [])
+        @server.emit('browserButtonActions', ['/foo', addressbook, actions])
+        assert(actions.value.index('/foo?export'))
       end
     end
   end

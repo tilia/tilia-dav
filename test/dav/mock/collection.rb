@@ -11,14 +11,6 @@ module Tilia
       #   * a string, for a file
       #   * An instance of \Sabre\DAV\INode.
       class Collection < Dav::Collection
-        protected
-
-        attr_accessor :name
-        attr_accessor :children
-        attr_accessor :parent
-
-        public
-
         # Creates the object
         #
         # @param string name
@@ -31,7 +23,7 @@ module Tilia
             if value.is_a?(String)
               @children << File.new(key, value, self)
             elsif value.is_a?(Hash)
-              @children << self.class.new(key, value, self)
+              @children << Collection.new(key, value, self)
             elsif value.is_a?(Dav::INode)
               @children << value
             else
@@ -89,6 +81,11 @@ module Tilia
         #
         # @return \Sabre\DAV\INode[]
         attr_reader :children
+
+        # Adds an already existing node to this collection.
+        def add_node(node)
+          @children << node
+        end
 
         # Removes a childnode from this node.
         #

@@ -146,6 +146,8 @@ module Tilia
               "{#{NS_CALDAV}}schedule-outbox-URL",
               lambda do
                 calendar_home_path = caldav_plugin.calendar_home_for_principal(principal_url)
+                return nil unless calendar_home_path
+
                 outbox_path = calendar_home_path + '/outbox/'
 
                 return Dav::Xml::Property::Href.new(outbox_path)
@@ -157,6 +159,8 @@ module Tilia
               "{#{NS_CALDAV}}schedule-inbox-URL",
               lambda do
                 calendar_home_path = caldav_plugin.calendar_home_for_principal(principal_url)
+                return nil unless calendar_home_path
+
                 inbox_path = calendar_home_path + '/inbox/'
 
                 return Dav::Xml::Property::Href.new(inbox_path)
@@ -169,6 +173,7 @@ module Tilia
                 # We don't support customizing this property yet, so in the
                 # meantime we just grab the first calendar in the home-set.
                 calendar_home_path = caldav_plugin.calendar_home_for_principal(principal_url)
+                return nil unless calendar_home_path
 
                 sccs = "{#{NS_CALDAV}}supported-calendar-component-set"
 
@@ -196,6 +201,8 @@ module Tilia
                     return Dav::Xml::Property::Href.new(child['href'])
                   end
                 end
+
+                nil
               end
             )
 

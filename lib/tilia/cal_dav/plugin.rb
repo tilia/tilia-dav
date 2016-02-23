@@ -56,14 +56,25 @@ module Tilia
       # Returns the path to a principal's calendar home.
       #
       # The return url must not end with a slash.
+      # This function should return null in case a principal did not have
+      # a calendar home.
       #
       # @param string principal_url
-      # @return string
+      # @return [String, nil]
       def calendar_home_for_principal(principal_url)
-        # The default is a bit naive, but it can be overwritten.
-        node_name = Uri.split(principal_url).second
+        # The default behavior for most sabre/dav servers is that there is a
+        # principals root node, which contains users directly under it.
+        #
+        # This function assumes that there are two components in a principal
+        # path. If there's more, we don't return a calendar home. This
+        # excludes things like the calendar-proxy-read principal (which it
+        # should).
+        parts = principal_url.gsub(%r{^/+|/+$}, '').split('/')
 
-        CALENDAR_ROOT + '/' + node_name
+        return nil unless parts.size == 2
+        return nil unless parts[0] == 'principals'
+
+        return CALENDAR_ROOT + '/' + parts[1]
       end
 
       # Returns a list of features for the DAV: HTTP header.
@@ -266,8 +277,9 @@ module Tilia
           prop_find.handle(
             "{#{NS_CALDAV}}calendar-home-set",
             lambda do
-              calendar_home_path = calendar_home_for_principal(principal_url) + '/'
-              return Dav::Xml::Property::Href.new(calendar_home_path)
+              calendar_home_path = calendar_home_for_principal(principal_url)
+              return nil unless calendar_home_path
+              return Dav::Xml::Property::Href.new(calendar_home_path + '/')
             end
           )
 
@@ -385,7 +397,7 @@ module Tilia
                 time_zones[calendar_path] = time_zone
               end
 
-              v_object.expand(report.expand['start'], report.expand['end'], time_zones[calendar_path])
+              v_object = v_object.expand(report.expand['start'], report.expand['end'], time_zones[calendar_path])
             end
 
             if needs_json
@@ -487,7 +499,7 @@ module Tilia
               if !requested_calendar_data
                 properties[200].delete('{urn:ietf:params:xml:ns:caldav}calendar-data')
               else
-                v_object.expand(report.expand['start'], report.expand['end'], calendar_time_zone) if report.expand
+                v_object = v_object.expand(report.expand['start'], report.expand['end'], calendar_time_zone) if report.expand
 
                 if needs_json
                   properties[200]["{#{NS_CALDAV}}calendar-data"] = v_object.json_serialize.to_json
@@ -506,10 +518,14 @@ module Tilia
         end
 
         if node.is_a?(ICalendarObjectContainer) && depth == 0
-          if @server.http_request.header('User-Agent').to_s.index('MSFT-WP/') == 0
-            # Windows phone incorrectly supplied depth as 0, when it actually
+          if @server.http_request.header('User-Agent').to_s.index('MSFT-') == 0
+            # Microsoft clients incorrectly supplied depth as 0, when it actually
             # should have set depth to 1. We're implementing a workaround here
             # to deal with this.
+            #
+            # This targets at least the following clients:
+            #   Windows 10
+            #   Windows Phone 8, 10
             depth = 1
           else
             fail Dav::Exception::BadRequest, 'A calendar-query REPORT on a calendar with a Depth: 0 is undefined. Set Depth to 1'
@@ -527,7 +543,7 @@ module Tilia
             if needs_json || report.expand
               v_object = VObject::Reader.read(properties[200]["{#{NS_CALDAV}}calendar-data"])
 
-              v_object.expand(report.expand['start'], report.expand['end'], calendar_time_zone) if report.expand
+              v_object = v_object.expand(report.expand['start'], report.expand['end'], calendar_time_zone) if report.expand
 
               if needs_json
                 properties[200]["{#{NS_CALDAV}}calendar-data"] = v_object.json_serialize.to_json

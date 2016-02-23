@@ -124,7 +124,7 @@ XML
         )
 
         client.response = Http::Response.new(405, {})
-        assert_raises(Exception) do
+        assert_raises(Http::ClientHttpException) do
           client.prop_find('foo', ['{DAV:}displayname', '{urn:zim}gir'])
         end
       end
@@ -206,14 +206,52 @@ XML
         )
       end
 
+      def test_prop_patch_http_error
+        client = ClientMock.new(
+          'baseUri' => '/',
+        )
+
+        client.response = Http::Response.new(403, {}, '')
+        assert_raises(Http::ClientHttpException) do
+          client.prop_patch('foo', '{DAV:}displayname' => 'hi', '{urn:zim}gir' => nil)
+        end
+      end
+
+      def test_prop_patch_multi_status_error
+        client = ClientMock.new(
+          'baseUri' => '/',
+        )
+
+        response_body = <<XML
+<?xml version="1.0"?>
+<multistatus xmlns="DAV:">
+<response>
+  <href>/foo</href>
+  <propstat>
+    <prop>
+      <displayname />
+    </prop>
+    <status>HTTP/1.1 403 Forbidden</status>
+  </propstat>
+</response>
+</multistatus>
+XML
+
+        client.response = Http::Response.new(207, {}, response_body)
+        assert_raises(Http::ClientException) do
+          client.prop_patch('foo', '{DAV:}displayname' => 'hi', '{urn:zim}gir' => nil)
+        end
+      end
+
       def test_options
         client = ClientMock.new(
           'baseUri' => '/'
         )
 
-        client.response = Http::Response.new(207,
-                                             'DAV' => 'calendar-access, extended-mkcol'
-                                            )
+        client.response = Http::Response.new(
+          207,
+          'DAV' => 'calendar-access, extended-mkcol'
+        )
         result = client.options
 
         assert_equal(

@@ -75,7 +75,8 @@ module Tilia
           def challenge(_request, _response)
           end
 
-          def initialize
+          def initialize *args
+            super
             @principal_prefix = 'principals/'
           end
         end

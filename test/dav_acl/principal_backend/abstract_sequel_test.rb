@@ -153,6 +153,22 @@ module Tilia
             backend.principal_by_path('principals/user')
           )
         end
+
+        def test_find_by_uri_unknown_scheme
+          db = sequel
+          backend = Sequel.new(db)
+          assert_nil(backend.find_by_uri('http://foo', 'principals'))
+        end
+
+        def test_find_by_uri
+          db = sequel
+          backend = Sequel.new(db)
+
+          assert_equal(
+            'principals/user',
+            backend.find_by_uri('mailto:user@example.org', 'principals')
+          )
+        end
       end
     end
   end
