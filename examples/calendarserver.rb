@@ -21,13 +21,6 @@ database = config.delete(:database)
 sequel = Sequel.mysql2(database, config)
 
 app = proc do |env|
-  root = Tilia::Dav::Fs::Directory.new(testserver_root)
-  server = Tilia::Dav::Server.new(env, [root])
-
-  server.add_plugin(Tilia::Dav::Browser::Plugin.new)
-
-  server.exec
-
   # Backends
   auth_backend      = Tilia::Dav::Auth::Backend::Sequel.new(sequel)
   principal_backend = Tilia::DavAcl::PrincipalBackend::Sequel.new(sequel)
