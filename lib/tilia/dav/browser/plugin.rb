@@ -452,7 +452,7 @@ FORM
         # @param string asset_name
         # @return string
         def asset_url(asset_name)
-          "#{@server.base_uri}?sabreAction=asset&assetName=#{URI.escape(asset_name)}"
+          "#{@server.base_uri}?sabreAction=asset&assetName=#{URI::DEFAULT_PARSER.escape(asset_name)}"
         end
 
         # This method returns a local pathname to an asset.
