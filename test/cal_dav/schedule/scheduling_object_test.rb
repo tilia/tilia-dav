@@ -94,7 +94,7 @@ ICS
           obj = children[0]
 
           size = obj.size
-          assert_kind_of(Fixnum, size)
+          assert_kind_of(Integer, size)
         end
 
         def test_get_owner

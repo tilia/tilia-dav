@@ -120,7 +120,7 @@ module Tilia
         # @param string principal_uri
         # @param string url Just the 'basename' of the url.
         # @param array properties
-        # @return [Fixnum] last insert id
+        # @return [Integer] last insert id
         def create_address_book(principal_uri, url, properties)
           values = {
             displayname: nil,

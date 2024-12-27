@@ -227,7 +227,7 @@ module Tilia
           end
         end
 
-        unless result.is_a? Fixnum
+        unless result.is_a? Integer
           fail 'A callback sent to handle() did not return an int or a bool'
         end
         self.result[property_name] = result

@@ -80,7 +80,7 @@ module Tilia
       obj = children[0]
 
       last_mod = obj.last_modified
-      assert_kind_of(Fixnum, last_mod)
+      assert_kind_of(Integer, last_mod)
     end
 
     def test_get_size
@@ -90,7 +90,7 @@ module Tilia
       obj = children[0]
 
       size = obj.size
-      assert_kind_of(Fixnum, size)
+      assert_kind_of(Integer, size)
     end
 
     def test_get_owner
