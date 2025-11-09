@@ -20,8 +20,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activesupport', '>= 4.0'
   s.add_runtime_dependency 'sys-filesystem', '~> 1.1'
   s.add_runtime_dependency 'sequel', '~> 4.29'
-  s.add_runtime_dependency 'sqlite3', '>= 1.3'
-  s.add_runtime_dependency 'mysql2', '~> 0.4'
   s.add_runtime_dependency 'chronic', '~> 0.10'
   s.add_runtime_dependency 'mail', '~> 2.6'
   s.add_runtime_dependency 'rchardet', '~>1.6'
