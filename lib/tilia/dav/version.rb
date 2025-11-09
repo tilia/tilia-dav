@@ -3,7 +3,7 @@ module Tilia
     # This class contains the SabreDAV version constants.
     class Version
       # Full version number
-      VERSION = '3.1.3'.freeze
+      VERSION = '3.1.4'.freeze
     end
   end
 end
