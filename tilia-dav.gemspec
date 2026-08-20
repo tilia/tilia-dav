@@ -11,8 +11,10 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/tilia/tilia-dav'
   s.required_ruby_version = '>= 3.1.0'
 
-  s.add_dependency 'tilia-event', '~> 2.0', '>= 2.0.2.2'
-  s.add_dependency 'tilia-http', '~> 4.2', '>= 4.2.1.4'
+  # Not raised to 2.0.2.2: tilia-event is the only tilia gem still available on
+  # rubygems.org, keep it installable without a git checkout.
+  s.add_dependency 'tilia-event', '~> 2.0'
+  s.add_dependency 'tilia-http', '~> 4.2', '>= 4.2.1.5'
   s.add_dependency 'tilia-uri', '~> 1.0', '>= 1.0.1.3'
   s.add_dependency 'tilia-vobject', '~> 4.0', '>= 4.0.2.4'
   s.add_dependency 'tilia-xml', '~> 1.3', '>= 1.3.0.3'
