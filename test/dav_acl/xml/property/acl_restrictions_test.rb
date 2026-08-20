@@ -16,7 +16,7 @@ module Tilia
 
             expected = <<XML
 <?xml version="1.0"?>
-<d:root xmlns:d="DAV:" xmlns:s="http://sabredav.org/ns"><d:grant-only/><d:no-invert/></d:root>'
+<d:root xmlns:d="DAV:" xmlns:s="http://sabredav.org/ns"><d:grant-only/><d:no-invert/></d:root>
 XML
 
             assert_xml_equal(expected, xml)

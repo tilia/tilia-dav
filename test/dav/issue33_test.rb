@@ -30,7 +30,7 @@ module Tilia
 
         info = server.copy_and_move_info(request)
 
-        assert_equal('%C3%A0fo%C3%B3', URI.encode(info['destination']))
+        assert_equal('%C3%A0fo%C3%B3', Tilia::Uri::PARSER.escape(info['destination']))
         refute(info['destinationExists'])
         refute(info['destinationNode'])
       end
@@ -41,15 +41,15 @@ module Tilia
         dir.create_directory('bar')
 
         tree = Tree.new(dir)
-        tree.move('bar', URI.decode('%C3%A0fo%C3%B3'))
+        tree.move('bar', Tilia::Uri::PARSER.unescape('%C3%A0fo%C3%B3'))
 
-        node = tree.node_for_path(URI.decode('%C3%A0fo%C3%B3'))
-        assert_equal(URI.decode('%C3%A0fo%C3%B3'), node.name)
+        node = tree.node_for_path(Tilia::Uri::PARSER.unescape('%C3%A0fo%C3%B3'))
+        assert_equal(Tilia::Uri::PARSER.unescape('%C3%A0fo%C3%B3'), node.name)
       end
 
       def test_dir_name
         dirname1 = 'bar'
-        dirname2 = URI.encode('%C3%A0fo%C3%B3')
+        dirname2 = Tilia::Uri::PARSER.escape('%C3%A0fo%C3%B3')
 
         assert(::File.dirname(dirname1) == ::File.dirname(dirname2))
       end
@@ -83,7 +83,7 @@ module Tilia
         server.sapi = Http::SapiMock.new
         server.exec
 
-        assert(::File.exist?("#{@temp_dir}/#{URI.decode('%C3%A0fo%C3%B3')}"))
+        assert(::File.exist?("#{@temp_dir}/#{Tilia::Uri::PARSER.unescape('%C3%A0fo%C3%B3')}"))
       end
     end
   end

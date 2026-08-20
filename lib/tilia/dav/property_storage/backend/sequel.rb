@@ -71,7 +71,7 @@ module Tilia
               when VT_XML
                 prop_find.set(row[:name], Xml::Property::Complex.new(row[:value]))
               when VT_OBJECT
-                prop_find.set(row[:name], YAML.load(row[:value]))
+                prop_find.set(row[:name], YAML.unsafe_load(row[:value]))
               end
             end
           end

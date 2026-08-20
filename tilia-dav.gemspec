@@ -9,18 +9,22 @@ Gem::Specification.new do |s|
   s.email       = 'tilia@jakobsack.de'
   s.files       = `git ls-files`.split("\n")
   s.homepage    = 'https://github.com/tilia/tilia-dav'
+  s.required_ruby_version = '>= 3.1.0'
 
-  s.add_runtime_dependency 'tilia-vobject', '~> 4.0'
-  s.add_runtime_dependency 'tilia-event', '~> 2.0'
-  s.add_runtime_dependency 'tilia-xml', '~> 1.2'
-  s.add_runtime_dependency 'tilia-http', '~> 4.1'
-  s.add_runtime_dependency 'tilia-uri', '~> 1.0'
+  s.add_dependency 'tilia-event', '~> 2.0', '>= 2.0.2.2'
+  s.add_dependency 'tilia-http', '~> 4.2', '>= 4.2.1.4'
+  s.add_dependency 'tilia-uri', '~> 1.0', '>= 1.0.1.3'
+  s.add_dependency 'tilia-vobject', '~> 4.0', '>= 4.0.2.4'
+  s.add_dependency 'tilia-xml', '~> 1.3', '>= 1.3.0.3'
 
   # External dependencies
-  s.add_runtime_dependency 'activesupport', '>= 4.0'
-  s.add_runtime_dependency 'sys-filesystem', '~> 1.1'
-  s.add_runtime_dependency 'sequel', '~> 4.29'
-  s.add_runtime_dependency 'chronic', '~> 0.10'
-  s.add_runtime_dependency 'mail', '~> 2.6'
-  s.add_runtime_dependency 'rchardet', '~>1.6'
+  s.add_dependency 'activesupport', '>= 6.0'
+  s.add_dependency 'chronic', '~> 0.10'
+  # 3.0 is the first release shipping lib/libxml-ruby.rb, the only entry point
+  # that still exists in libxml-ruby 6.
+  s.add_dependency 'libxml-ruby', '>= 3.0'
+  s.add_dependency 'mail', '~> 2.8'
+  s.add_dependency 'rchardet', '>= 1.8'
+  s.add_dependency 'sequel', '>= 5.0'
+  s.add_dependency 'sys-filesystem', '~> 1.4'
 end

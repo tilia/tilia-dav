@@ -16,7 +16,7 @@ module Tilia
   require 'sys/filesystem'
 
   # XML lib
-  require 'libxml'
+  require 'libxml-ruby'
 
   # Time helper parse('tomorrow')
   require 'chronic'

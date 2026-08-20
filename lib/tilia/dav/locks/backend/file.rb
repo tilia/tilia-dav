@@ -118,7 +118,7 @@ module Tilia
             handle.close
 
             # Unserializing and checking if the resource file contains data for this file
-            data = YAML.load(data)
+            data = YAML.unsafe_load(data)
             data || []
           end
 

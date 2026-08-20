@@ -81,7 +81,8 @@ module Tilia
   module TestUtil
     def self.sqlite
       db = Sequel.sqlite
-      db.pragma_set('case_sensitive_like', false) # true seems to be default
+      # true seems to be the default; Database#pragma_set is gone in sequel 5
+      db.run('PRAGMA case_sensitive_like = 0')
       db
     end
 
@@ -92,7 +93,7 @@ module Tilia
       begin
         sequel = Sequel.mysql2(database, config)
       rescue
-        skip('could not connect to mysql database')
+        raise Minitest::Skip, 'could not connect to mysql database'
       end
 
       sequel
@@ -106,12 +107,12 @@ module Tilia
 
     def self.database_config
       database_file = File.join(File.dirname(__FILE__), '..', 'database.yml')
-      skip('could not load database file for mysql database') unless File.exist?(database_file)
+      raise Minitest::Skip, 'could not load database file for mysql database' unless File.exist?(database_file)
 
       begin
-        YAML.load(File.read(database_file))
+        YAML.unsafe_load(File.read(database_file))
       rescue
-        skip('database.yml is invalid')
+        raise Minitest::Skip, 'database.yml is invalid'
       end
     end
 

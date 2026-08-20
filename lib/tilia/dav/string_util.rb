@@ -16,16 +16,15 @@ module Tilia
       def self.text_match(haystack, needle, collation, match_type = 'contains')
         case collation
         when 'i;ascii-casemap'
-          # NOTE: following is not true for RUBY
-          # default strtolower takes locale into consideration
-          # we don't want this.
-          haystack = haystack.upcase
-          needle = needle.upcase
+          # String#upcase is unicode aware since ruby 2.4, but this collation
+          # has to stay ascii only.
+          haystack = haystack.upcase(:ascii)
+          needle = needle.upcase(:ascii)
         when 'i;octet'
           # Do nothing
         when 'i;unicode-casemap'
-          haystack = haystack.mb_chars.upcase.to_s
-          needle = needle.mb_chars.upcase.to_s
+          haystack = haystack.upcase
+          needle = needle.upcase
         else
           fail Exception::BadRequest, "Collation type: #{collation} is not supported"
         end
